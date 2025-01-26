@@ -1,4 +1,3 @@
-# library_api
 # Library API
 
 A RESTful API for managing a library system. This API provides CRUD functionality for books and user management. It allows users to register, log in, and interact with the library's collection of books. The API uses **JWT (JSON Web Tokens)** for secure user authentication.
