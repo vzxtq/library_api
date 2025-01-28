@@ -25,7 +25,8 @@ namespace libraryApi.Mappers
                 Author = createBooksRequestDto.Author,
                 Genre = createBooksRequestDto.Genre,
                 Year = createBooksRequestDto.Year,
-                Description = createBooksRequestDto.Description
+                Description = createBooksRequestDto.Description,
+                isAvailable = createBooksRequestDto.isAvailable
             };
         }
         public static Books ToLibraryFromUpdateDto(this UpdateBooksDto updateBooksDto, Books existingBook)
@@ -35,6 +36,7 @@ namespace libraryApi.Mappers
             existingBook.Genre = updateBooksDto.Genre;
             existingBook.Year = updateBooksDto.Year;
             existingBook.Description = updateBooksDto.Description;
+            existingBook.isAvailable = updateBooksDto.isAvailable;
             return existingBook;
         }
     }

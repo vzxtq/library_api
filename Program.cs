@@ -80,6 +80,12 @@ builder.Services.AddScoped<ILibraryRepo, LibraryRepo>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await SeedRolesAndAdminAsync(services);
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -94,3 +100,38 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 
 app.Run();
+
+static async Task SeedRolesAndAdminAsync(IServiceProvider services)
+{
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+
+    if (!await roleManager.RoleExistsAsync("User"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("User"));
+    }
+
+    var adminEmail = "admin@example.com";
+    var adminPassword = "Admin@123";
+
+    if(await userManager.FindByEmailAsync(adminEmail) == null)
+    {
+        var admin = new IdentityUser
+        {
+            UserName = adminEmail,
+            Email = adminEmail
+        };
+
+        var createUser = await userManager.CreateAsync(admin, adminPassword);
+
+        if(createUser.Succeeded)
+        {
+            await userManager.AddToRoleAsync(admin, "Admin");
+        }
+    }
+}

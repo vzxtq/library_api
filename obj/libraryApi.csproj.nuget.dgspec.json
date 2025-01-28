@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\library\\libraryapi\\libraryApi.csproj": {}
+    "C:\\Users\\user\\library\\libraryApi\\libraryApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\library\\libraryapi\\libraryApi.csproj": {
+    "C:\\Users\\user\\library\\libraryApi\\libraryApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\library\\libraryapi\\libraryApi.csproj",
+        "projectUniqueName": "C:\\Users\\user\\library\\libraryApi\\libraryApi.csproj",
         "projectName": "libraryApi",
-        "projectPath": "C:\\Users\\user\\library\\libraryapi\\libraryApi.csproj",
+        "projectPath": "C:\\Users\\user\\library\\libraryApi\\libraryApi.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\library\\libraryapi\\obj\\",
+        "outputPath": "C:\\Users\\user\\library\\libraryApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,6 +51,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AspNetCore.Hateoas": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[13.0.1, )"
@@ -58,6 +62,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.1, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -90,6 +98,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.3.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

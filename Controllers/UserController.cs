@@ -34,6 +34,15 @@ public class AccountController : ControllerBase
 
         if (result.Succeeded)
         {
+            if(model.Email == "admin@example.com")
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+            
             return Ok(new { Message = "User registered successfully" });
         }
 
@@ -52,8 +61,9 @@ public class AccountController : ControllerBase
         var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
 
         if (!result.Succeeded)
+        {
             return Unauthorized();
-
+        }
         var token = GenerateJwtToken(user);
         return Ok(new { Token = token });
     }
@@ -65,6 +75,11 @@ public class AccountController : ControllerBase
             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),        
         };
+
+        foreach(var role in _userManager.GetRolesAsync(user).Result)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
